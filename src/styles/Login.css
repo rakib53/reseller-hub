@@ -1,0 +1,110 @@
+.loginWrapper {
+  width: 100%;
+  min-height: 100vh;
+  background-image: url("../images/loginbg.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.login {
+  width: 100%;
+  max-width: 550px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  padding: 30px 40px;
+  margin-top: 130px;
+  margin-bottom: 50px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+
+.login > .title {
+  text-align: center;
+  color: #000000;
+  font-size: 30px;
+}
+
+.login > .lognDesc {
+  font-size: 15px;
+  text-align: center;
+}
+
+.inputField > label {
+  font-size: 14px;
+}
+
+.inputField {
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.inputField input {
+  width: 100%;
+  padding: 10px 10px 10px 30px;
+  outline: none;
+  border: none;
+  background: transparent;
+  border-bottom: 2px solid #bfbaba;
+  font-size: 16px;
+  border-radius: 5px;
+  transition: all 0.3s;
+}
+
+.inputField input:focus {
+  transition: all 0.3s;
+  border-bottom: 2px solid #000000;
+}
+
+.inputField input::placeholder {
+  font-family: "Poppins", sans-serif;
+}
+
+.icon {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.loginBtn {
+  padding: 10px 50px;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  color: #fff;
+  border-radius: 5px;
+  background-color: #636e72;
+  transition: all 0.3s;
+}
+
+.loginBtn:hover {
+  cursor: pointer;
+  background-color: #51595c;
+  transition: all 0.3s;
+}
+
+.loginWithGoogle {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  margin-bottom: 40px;
+}
+
+.google {
+  width: 30px;
+  height: 30px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+
+.signUpIn {
+  margin-top: 30px;
+}
+
+.signUpLink {
+  color: #000000;
+}

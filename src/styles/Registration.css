@@ -1,0 +1,13 @@
+.accountRole {
+  display: flex;
+  margin-top: 10px;
+}
+
+.acc {
+  display: flex;
+  gap: 5px;
+}
+
+.acc:nth-child(1) {
+  margin-right: 20px;
+}

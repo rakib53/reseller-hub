@@ -1,0 +1,35 @@
+.navbarWrapper {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  background-color: #2d3436;
+}
+
+.navbar {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.logo a {
+  color: #fff;
+}
+
+.menu {
+  display: flex;
+  list-style-type: none;
+}
+
+.menu .navItem {
+  margin: 0 10px;
+}
+
+.menu .navItem .navLink,
+.profile > .navLink {
+  color: #fff;
+  text-decoration: none;
+}

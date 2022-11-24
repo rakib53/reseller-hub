@@ -1,0 +1,17 @@
+[
+  {
+    "name": "Digital Camera",
+    "categoryCode": "digitalcamera",
+    "image": "https://i.ibb.co/ChwZytV/istockphoto-185278433-612x612.jpg"
+  },
+  {
+    "name": "CC Camera",
+    "categoryCode": "cccamera",
+    "image": "https://i.ibb.co/FwTdHR6/ds-2ce56c0t-irpf-1-228x228.jpg"
+  },
+  {
+    "name": "Spy Camera",
+    "categoryCode": "spycamera",
+    "image": "https://i.ibb.co/Dk9xSsR/Spy-Cameras-10-Wyze.webp"
+  }
+]

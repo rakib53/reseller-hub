@@ -1,0 +1,32 @@
+.productsWrapper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin: 30px 0;
+}
+
+.products {
+  border: 1px solid rgb(93, 88, 88);
+  border-radius: 5px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.productsImage {
+  width: 200px;
+  height: 200px;
+  margin: 15px 0;
+  object-fit: cover;
+}
+
+.descTitle {
+  font-weight: 700;
+  margin-top: 10px;
+}
+
+.bookNowBtn {
+  margin-top: 10px;
+  padding: 10px;
+}
