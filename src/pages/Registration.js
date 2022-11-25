@@ -57,15 +57,13 @@ const Registration = () => {
       .catch((err) => {
         notifyError(err.message);
       });
-
-    // console.log({ name, photoURL, accountType, email, password });
   };
 
   const loginWithGoogle = () => {
     LoginWithGoogle()
       .then((user) => {
-        notifySuccess("Successfully Logged in with Google!");
         navigate("/");
+        notifySuccess("Successfully Logged in with Google!");
       })
       .catch((err) => {
         notifyError(err.message);

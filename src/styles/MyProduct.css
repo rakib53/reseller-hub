@@ -1,0 +1,72 @@
+.myProductWrpper {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  margin: 50px 0;
+}
+
+.myProduct {
+  border-radius: 5px;
+  border: 1px solid rgb(87, 85, 85);
+  padding: 20px;
+  position: relative;
+}
+
+.productAction,
+.addProductLink {
+  padding: 2px 10px;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 14px;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.3s;
+}
+
+.productAvaiable,
+.addProductLink {
+  background-color: #27ae60;
+}
+
+.productAvaiable:hover {
+  background-color: #208c4d;
+  transition: all 0.3s;
+}
+
+.soldProduct {
+  background-color: #e74c3c;
+}
+
+.soldProduct:hover {
+  background-color: #b83e30;
+  transition: all 0.3s;
+}
+
+.deleteProduct {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  width: 25px;
+  height: 25px;
+  color: #e74c3c;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.deleteProduct:hover {
+  color: #be4437;
+  transition: all 0.3s;
+}
+
+.noProduct {
+  margin: 5px 0;
+}
+
+.noProductText {
+  width: 100%;
+  padding: 200px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}

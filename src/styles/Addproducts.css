@@ -1,0 +1,56 @@
+.addProductsWrapper {
+  width: 100%;
+  max-width: 750px;
+  margin: 0 auto;
+}
+
+.inputFiled {
+  width: 100%;
+  margin: 15px 0;
+}
+
+.inputFiled input,
+.selectOption,
+.productDesc,
+option {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  border: 2px solid #636e72;
+  font-family: "Poppins", sans-serif;
+}
+
+.inputFiled input::placeholder {
+  font-family: "Poppins", sans-serif;
+}
+
+.selectOption {
+  width: 100%;
+}
+
+.productDesc {
+  width: 100%;
+  min-height: 150px;
+  resize: none;
+}
+
+.addProductWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.addProducts {
+  padding: 15px 30px;
+  background-color: #636e72;
+  border-radius: 5px;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.addProducts:hover {
+  background-color: #43494b;
+  transition: all 0.3s;
+}

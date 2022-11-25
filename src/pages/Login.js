@@ -10,6 +10,8 @@ import "../styles/Login.css";
 const Login = () => {
   const { loginWithEmailPass, LoginWithGoogle } = useContext(myContext);
 
+  const notifySuccess = (text) => toast.success(text);
+  const notifyError = (text) => toast.error(text);
   const navigate = useNavigate();
 
   const handleLogin = (event) => {
@@ -18,8 +20,10 @@ const Login = () => {
     const password = event.target.password.value;
     loginWithEmailPass(name, password)
       .then((user) => {
+        notifySuccess(
+          "Login succcesssssssssssssssssssssssssssssssssssssssssssssssssss"
+        );
         navigate("/");
-        notifySuccess("Login succcess");
       })
       .catch((err) => {
         notifyError(err.message);
@@ -40,9 +44,6 @@ const Login = () => {
   useEffect(() => {
     document.title = "Login || Reseller Hub";
   }, []);
-
-  const notifySuccess = (text) => toast.success(text);
-  const notifyError = (text) => toast.error(text);
 
   return (
     <div className="loginWrapper">

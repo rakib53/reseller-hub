@@ -22,8 +22,6 @@ const Products = () => {
       });
   }, [categoryCode]);
 
-  console.log(allProducts);
-
   return (
     <div className="container">
       <h2>All Product for {allProducts[0]?.category}</h2>
@@ -32,15 +30,16 @@ const Products = () => {
           return (
             <div key={products._id} className="products">
               <h3>{products?.name}</h3>
-              <small>Posted on 12 nov</small>
-              <img className="productsImage" src={products?.image} alt="" />
+              <small>Posted on 12 nov, {products?.location}</small>
+              <div className="productImagewrapper">
+                <img className="productsImage" src={products?.image} alt="" />
+              </div>
               <h2>USD ${products?.sellPrice}</h2>
               <small>Original price:- USD {products?.originalPrice}</small>
               <div>
                 <p>condition: {products?.condition}</p>
                 <p>Brand: {products?.brand}</p>
                 <p>Used for: {products?.yearOfUsed}</p>
-                <p>Location: {products?.location}</p>
               </div>
               <div className="description">
                 <p className="descTitle">Description</p>
