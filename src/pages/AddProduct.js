@@ -24,6 +24,17 @@ const AddProduct = () => {
     const sellerEmail = user?.email;
     const isSellerVerified = true;
     const categry = event.target.category.value;
+    const postOn = `${new Date().toDateString().split(" ")[1]} ${
+      new Date().toDateString().split(" ")[2]
+    } ${new Date().toLocaleString().split(" ")[1].split(":")[0]}:${
+      new Date().toLocaleString().split(" ")[1].split(":")[1]
+    } ${new Date().toLocaleString().split(" ")[2]}`;
+
+    // new Date().toDateString().split(" ")[1] Nov
+    // new Date().toDateString().split(" ")[2] 25
+    // new Date().toLocaleString().split(" ")[1].split(":")[0] 4
+    // new Date().toLocaleString().split(" ")[1].split(":")[1] 54
+    // new Date().toLocaleString().split(" ")[2] PM
 
     fetch("http://localhost:5000/products", {
       method: "POST",
@@ -46,6 +57,7 @@ const AddProduct = () => {
         sellerVerfied: isSellerVerified,
         phone: phoneNumber,
         salesStatus: "available",
+        postedOn: postOn,
       }),
     })
       .then((res) => {

@@ -1,10 +1,14 @@
 import React from "react";
 import { createBrowserRouter } from "react-router-dom";
+import Dashboard from "../Layout/Dashboard";
 import LoginRegistration from "../Layout/LoginRegistration";
 import Main from "../Layout/Main";
 import AddProduct from "../pages/AddProduct";
+import AllBuyer from "../pages/AllBuyer";
+import AllUser from "../pages/AllUser";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
+import MyOrder from "../pages/MyOrder";
 import Myproducts from "../pages/Myproducts";
 import Products from "../pages/Products";
 import Registration from "../pages/Registration";
@@ -15,10 +19,7 @@ const Router = createBrowserRouter([
     element: <Main />,
     children: [
       { path: "/", element: <Home></Home> },
-      {
-        path: "/addproduct",
-        element: <AddProduct></AddProduct>,
-      },
+
       {
         path: "/myproducts",
         element: <Myproducts></Myproducts>,
@@ -44,6 +45,32 @@ const Router = createBrowserRouter([
       {
         path: "/products/:categoryCode",
         element: <Products />,
+      },
+    ],
+  },
+  {
+    path: "/dashboard",
+    element: <Dashboard></Dashboard>,
+    children: [
+      {
+        path: "/dashboard/addproduct",
+        element: <AddProduct></AddProduct>,
+      },
+      {
+        path: "/dashboard/alluser",
+        element: <AllUser></AllUser>,
+      },
+      {
+        path: "/dashboard/allbuyer",
+        element: <AllBuyer></AllBuyer>,
+      },
+      {
+        path: "/dashboard/myproduct",
+        element: <Myproducts></Myproducts>,
+      },
+      {
+        path: "/dashboard/myorder",
+        element: <MyOrder></MyOrder>,
       },
     ],
   },

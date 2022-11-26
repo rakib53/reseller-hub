@@ -44,8 +44,6 @@ const Myproducts = () => {
       });
   };
 
-  console.log(allProducts);
-
   return (
     <div className="container">
       {allProducts?.length <= 0 ? (
@@ -53,7 +51,7 @@ const Myproducts = () => {
           <h3 className="noProduct">No Product Were Found</h3>
           <p>
             Start Listing your product by clicking{" "}
-            <Link to={"/addproduct"} className="addProductLink">
+            <Link to={"/dashboard/addproduct"} className="addProductLink">
               Add a product
             </Link>
           </p>
@@ -69,16 +67,25 @@ const Myproducts = () => {
                     deleteProduct(product._id);
                   }}
                 ></AiFillCloseCircle>
-                <p>{product?.name}</p>
-                <Link
-                  className={`productAction ${
-                    product?.salesStatus === "available"
-                      ? "productAvaiable"
-                      : "soldProduct"
-                  }`}
-                >
-                  {product?.salesStatus}
-                </Link>
+                <div className="productImage">
+                  <img className="myProductImage" src={product?.image} alt="" />
+                </div>
+                <div className="productsInfo">
+                  <h3>{product?.name}</h3>
+                  <small>
+                    Posted on {product?.postedOn}, {product?.location}
+                  </small>
+                  <p>USD ${product?.sellPrice}</p>
+                  {product?.salesStatus === "available" ? (
+                    <Link className="productAction productAvaiable">
+                      {product?.salesStatus}
+                    </Link>
+                  ) : (
+                    <Link className="productAction soldProduct">
+                      {product?.salesStatus}
+                    </Link>
+                  )}
+                </div>
               </div>
             );
           })}
