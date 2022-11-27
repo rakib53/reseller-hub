@@ -12,7 +12,7 @@ const AddProduct = () => {
     event.preventDefault();
     const productTitle = event.target.productTitle.value;
     const brandName = event.target.brandName.value;
-    const uploadPhoto = event.target.uploadPhoto.value;
+    // const uploadPhoto = event.target.uploadPhoto.value;
     const productCondition = event.target.productCondition.value;
     const sellPrice = event.target.sellPrice.value;
     const originalPrice = event.target.originalPrice.value;
@@ -29,49 +29,98 @@ const AddProduct = () => {
     } ${new Date().toLocaleString().split(" ")[1].split(":")[0]}:${
       new Date().toLocaleString().split(" ")[1].split(":")[1]
     } ${new Date().toLocaleString().split(" ")[2]}`;
+    const imageBBKey = process.env.REACT_APP_imgbbKey;
+    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageBBKey}`;
+    const formData = new FormData();
+    formData.append("image", event.target.image.files[0]);
 
-    // new Date().toDateString().split(" ")[1] Nov
-    // new Date().toDateString().split(" ")[2] 25
-    // new Date().toLocaleString().split(" ")[1].split(":")[0] 4
-    // new Date().toLocaleString().split(" ")[1].split(":")[1] 54
-    // new Date().toLocaleString().split(" ")[2] PM
-
-    fetch("http://localhost:5000/products", {
+    fetch(url, {
       method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        name: productTitle,
-        brand: brandName,
-        desc: productDesc,
-        image: uploadPhoto,
-        category: categry,
-        condition: productCondition,
-        location: addLocation,
-        originalPrice: originalPrice,
-        sellPrice: sellPrice,
-        yearOfUsed: usedTime,
-        sellerName: sellerName,
-        sellerEmail: sellerEmail,
-        sellerVerfied: isSellerVerified,
-        phone: phoneNumber,
-        salesStatus: "available",
-        postedOn: postOn,
-      }),
+      body: formData,
     })
       .then((res) => {
         return res.json();
       })
-      .then((data) => {
-        if (data.acknowledged) {
-          notifySuccess("Successfully Added a Product!");
-          navigate("/dashboard/myproduct");
+      .then((imageData) => {
+        if (imageData.success) {
+          fetch("http://localhost:5000/products", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({
+              name: productTitle,
+              brand: brandName,
+              desc: productDesc,
+              image: imageData.data.url,
+              category: categry,
+              condition: productCondition,
+              location: addLocation,
+              originalPrice: originalPrice,
+              sellPrice: sellPrice,
+              yearOfUsed: usedTime,
+              sellerName: sellerName,
+              sellerEmail: sellerEmail,
+              sellerVerfied: isSellerVerified,
+              phone: phoneNumber,
+              salesStatus: "available",
+              postedOn: postOn,
+            }),
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((data) => {
+              if (data.acknowledged) {
+                notifySuccess("Successfully Added a Product!");
+                navigate("/dashboard/myproduct");
+              }
+            })
+            .catch((err) => {
+              notifyError(err.message);
+            });
         }
       })
       .catch((err) => {
-        notifyError(err.message);
+        console.log(err.message);
       });
+
+    // fetch("http://localhost:5000/products", {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     name: productTitle,
+    //     brand: brandName,
+    //     desc: productDesc,
+    //     image: uploadPhoto,
+    //     category: categry,
+    //     condition: productCondition,
+    //     location: addLocation,
+    //     originalPrice: originalPrice,
+    //     sellPrice: sellPrice,
+    //     yearOfUsed: usedTime,
+    //     sellerName: sellerName,
+    //     sellerEmail: sellerEmail,
+    //     sellerVerfied: isSellerVerified,
+    //     phone: phoneNumber,
+    //     salesStatus: "available",
+    //     postedOn: postOn,
+    //   }),
+    // })
+    //   .then((res) => {
+    //     return res.json();
+    //   })
+    //   .then((data) => {
+    //     if (data.acknowledged) {
+    //       notifySuccess("Successfully Added a Product!");
+    //       navigate("/dashboard/myproduct");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     notifyError(err.message);
+    //   });
   };
 
   const notifySuccess = (text) => toast.success(text);
@@ -101,13 +150,13 @@ const AddProduct = () => {
             />
           </div>
 
-          <div className="inputFiled">
+          <div className="inputField">
+            <label htmlFor="profilePhoto">Upload Product Photo</label>
             <input
-              className="bg-white"
-              type="text"
-              name="uploadPhoto"
-              placeholder="Upload your photo"
-              required
+              type="file"
+              name="image"
+              id="profilePhoto"
+              className="profilePhotoInput"
             />
           </div>
 

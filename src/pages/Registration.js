@@ -75,38 +75,6 @@ const Registration = () => {
       .catch((err) => {
         console.log(err.message);
       });
-
-    // regWithEmailPass(email, password)
-    //   .then((user) => {
-    //     fetch("http://localhost:5000/users", {
-    //       method: "POST",
-    //       headers: {
-    //         "content-type": "application/json",
-    //       },
-    //       body: JSON.stringify({
-    //         displayName: name,
-    //         email,
-    //         photoURL,
-    //         accountType,
-    //       }),
-    //     })
-    //       .then((data) => {
-    //         console.log(data);
-    //       })
-    //       .catch((err) => {
-    //         console.log(err.message);
-    //       });
-    //     navigate("/login");
-    //     updateUserinfo(name, photoURL, accountType);
-    //     signOutUser()
-    //       .then((signOut) => {})
-    //       .catch((err) => {});
-    //     notifySuccess("Successfully Registred!!");
-    //     console.log(user.user);
-    //   })
-    //   .catch((err) => {
-    //     notifyError(err.message);
-    //   });
   };
 
   const loginWithGoogle = () => {
