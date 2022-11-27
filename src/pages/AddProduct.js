@@ -66,7 +66,7 @@ const AddProduct = () => {
       .then((data) => {
         if (data.acknowledged) {
           notifySuccess("Successfully Added a Product!");
-          navigate("/myproducts");
+          navigate("/dashboard/myproduct");
         }
       })
       .catch((err) => {
@@ -83,6 +83,7 @@ const AddProduct = () => {
         <form onSubmit={handleAddProduct}>
           <div className="inputFiled">
             <input
+              className="bg-white"
               type="text"
               name="productTitle"
               placeholder="Product title"
@@ -92,6 +93,7 @@ const AddProduct = () => {
 
           <div className="inputFiled">
             <input
+              className="bg-white"
               type="text"
               name="brandName"
               placeholder="Bran name"
@@ -101,6 +103,7 @@ const AddProduct = () => {
 
           <div className="inputFiled">
             <input
+              className="bg-white"
               type="text"
               name="uploadPhoto"
               placeholder="Upload your photo"
@@ -113,7 +116,7 @@ const AddProduct = () => {
 
             <select
               id="condition"
-              className="selectOption"
+              className="selectOption bg-white"
               name="productCondition"
             >
               <option value="Good">Good</option>
@@ -124,7 +127,8 @@ const AddProduct = () => {
 
           <div className="inputFiled">
             <input
-              type="text"
+              className="bg-white"
+              type="number"
               name="sellPrice"
               placeholder="Sell Price"
               required
@@ -133,7 +137,8 @@ const AddProduct = () => {
 
           <div className="inputFiled">
             <input
-              type="text"
+              className="bg-white"
+              type="number"
               name="originalPrice"
               placeholder="Original Price"
               required
@@ -143,7 +148,11 @@ const AddProduct = () => {
           <div className="inputFiled">
             <label htmlFor="category">Choose a category:</label>
 
-            <select id="category" className="selectOption" name="category">
+            <select
+              id="category"
+              className="selectOption bg-white"
+              name="category"
+            >
               <option value="digitalcamera">Digital Camera</option>
               <option value="cccamera">CC Camera</option>
               <option value="spycamera">Spy Camera</option>
@@ -152,7 +161,8 @@ const AddProduct = () => {
 
           <div className="inputFiled">
             <input
-              type="text"
+              className="bg-white"
+              type="number"
               name="phone"
               placeholder="Phone number"
               required
@@ -161,6 +171,7 @@ const AddProduct = () => {
 
           <div className="inputFiled">
             <input
+              className="bg-white"
               type="text"
               name="addLocation"
               placeholder="Add your location"
@@ -170,6 +181,7 @@ const AddProduct = () => {
 
           <div className="inputFiled">
             <input
+              className="bg-white"
               type="text"
               name="usedTime"
               placeholder="Used Time"
@@ -179,7 +191,7 @@ const AddProduct = () => {
 
           <div className="inputFiled">
             <textarea
-              className="productDesc"
+              className="productDesc bg-white"
               name="productDesc"
               placeholder="Product Description"
             ></textarea>

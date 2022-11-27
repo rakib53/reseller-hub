@@ -44,6 +44,26 @@ const Myproducts = () => {
       });
   };
 
+  const getAdvertise = (prdt) => {
+    console.log(prdt);
+    fetch("http://localhost:5000/advertises", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ prdt }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((produt) => {
+        console.log(produt);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  };
+
   return (
     <div className="container">
       {allProducts?.length <= 0 ? (
@@ -85,6 +105,12 @@ const Myproducts = () => {
                       {product?.salesStatus}
                     </Link>
                   )}
+                  <button
+                    onClick={() => getAdvertise(product)}
+                    className="bg-red-500 text-white rounded p-1"
+                  >
+                    Advertise
+                  </button>
                 </div>
               </div>
             );

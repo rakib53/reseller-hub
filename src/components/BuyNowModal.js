@@ -3,7 +3,9 @@ import { myContext } from "../Ccontext/Context";
 
 const BuyNowModal = ({ productData }) => {
   const { user } = useContext(myContext);
+
   console.log(productData);
+
   const handleOrderSubmit = (event) => {
     event.preventDefault();
 
@@ -15,6 +17,55 @@ const BuyNowModal = ({ productData }) => {
     const price = productData?.sellPrice;
     const productId = productData?._id;
     const productCategory = productData?.categoryCode;
+    const salesStatus = "Booked";
+    const productImage = productData?.image;
+
+    fetch("http://localhost:5000/orders", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({
+        buyerName,
+        buyerEmail,
+        buyerPhone,
+        meetLocation,
+        productName,
+        price,
+        productId,
+        productCategory,
+        salesStatus,
+        productImage,
+      }),
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        console.log(data);
+        fetch(`http://localhost:5000/products/${productId}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ salesStatus }),
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+
+    event.target.phone.value = "";
+    event.target.location.value = "";
   };
 
   return (
@@ -75,7 +126,9 @@ const BuyNowModal = ({ productData }) => {
                 type="submit"
                 className="p-2 bg-slate-700 text-slate-50 rounded w-50"
               >
-                Buy now
+                <label htmlFor="buyNowModal" className="w-full">
+                  Buy now
+                </label>
               </button>
             </div>
           </form>

@@ -1,0 +1,31 @@
+.orderWrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.Order {
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+
+.orderImageWrapper {
+  width: 30%;
+  margin-right: 20px;
+}
+
+.orderImage {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+
+@media screen and (max-width: 768px) {
+  .orderWrapper {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

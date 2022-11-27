@@ -1,18 +1,17 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineUserDelete } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { FiLock } from "react-icons/fi";
-import {
-  MdOutlineMailOutline,
-  MdOutlinePhotoSizeSelectActual,
-} from "react-icons/md";
+import { MdOutlineMailOutline } from "react-icons/md";
 import { Link, useNavigate } from "react-router-dom";
 import { myContext } from "../Ccontext/Context";
+import spiner from "../images/spinner.svg";
 import "../styles/Login.css";
 import "../styles/Registration.css";
 
 const Registration = () => {
+  const [spinner, setSpinner] = useState(false);
   const { regWithEmailPass, LoginWithGoogle, updateUserinfo, signOutUser } =
     useContext(myContext);
 
@@ -20,24 +19,111 @@ const Registration = () => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    setSpinner(true);
     const name = event.target.name.value;
-    const photoURL = event.target.photo.value;
     const accountType = event.target.accounttype.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
+    const imageBBKey = process.env.REACT_APP_imgbbKey;
+    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageBBKey}`;
+    const formData = new FormData();
+    formData.append("image", event.target.image.files[0]);
 
-    regWithEmailPass(email, password)
-      .then((user) => {
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => {
+        return res.json();
+      })
+      .then((imageData) => {
+        if (imageData.success) {
+          regWithEmailPass(email, password)
+            .then((user) => {
+              setSpinner(false);
+              fetch("http://localhost:5000/users", {
+                method: "POST",
+                headers: {
+                  "content-type": "application/json",
+                },
+                body: JSON.stringify({
+                  displayName: name,
+                  email,
+                  photoURL: imageData.data.url,
+                  accountType,
+                }),
+              })
+                .then((data) => {
+                  console.log(data);
+                })
+                .catch((err) => {
+                  console.log(err.message);
+                });
+              navigate("/login");
+              updateUserinfo(name, imageData.data.url, accountType);
+              signOutUser()
+                .then((signOut) => {})
+                .catch((err) => {});
+              notifySuccess("Successfully Registred!!");
+              console.log(user.user);
+            })
+            .catch((err) => {
+              notifyError(err.message);
+            });
+        }
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
+    // regWithEmailPass(email, password)
+    //   .then((user) => {
+    //     fetch("http://localhost:5000/users", {
+    //       method: "POST",
+    //       headers: {
+    //         "content-type": "application/json",
+    //       },
+    //       body: JSON.stringify({
+    //         displayName: name,
+    //         email,
+    //         photoURL,
+    //         accountType,
+    //       }),
+    //     })
+    //       .then((data) => {
+    //         console.log(data);
+    //       })
+    //       .catch((err) => {
+    //         console.log(err.message);
+    //       });
+    //     navigate("/login");
+    //     updateUserinfo(name, photoURL, accountType);
+    //     signOutUser()
+    //       .then((signOut) => {})
+    //       .catch((err) => {});
+    //     notifySuccess("Successfully Registred!!");
+    //     console.log(user.user);
+    //   })
+    //   .catch((err) => {
+    //     notifyError(err.message);
+    //   });
+  };
+
+  const loginWithGoogle = () => {
+    LoginWithGoogle()
+      .then((users) => {
+        const user = users.user;
+
         fetch("http://localhost:5000/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
           },
           body: JSON.stringify({
-            displayName: name,
-            email,
-            photoURL,
-            accountType,
+            displayName: user.displayName,
+            email: user.email,
+            photoURL: user.photoURL,
+            accountType: "buyer",
           }),
         })
           .then((data) => {
@@ -46,22 +132,7 @@ const Registration = () => {
           .catch((err) => {
             console.log(err.message);
           });
-        navigate("/login");
-        updateUserinfo(name, photoURL, accountType);
-        signOutUser()
-          .then((signOut) => {})
-          .catch((err) => {});
-        notifySuccess("Successfully Registred!!");
-        console.log(user.user);
-      })
-      .catch((err) => {
-        notifyError(err.message);
-      });
-  };
 
-  const loginWithGoogle = () => {
-    LoginWithGoogle()
-      .then((user) => {
         navigate("/");
         notifySuccess("Successfully Logged in with Google!");
       })
@@ -80,6 +151,12 @@ const Registration = () => {
   return (
     <div className="loginWrapper">
       <div className="login">
+        {spinner && (
+          <div className="regSpinner">
+            <img className="spinners" src={spiner} alt={""} />
+            <p>Uploading Photo Please Wait!!</p>
+          </div>
+        )}
         <h1 className="title">Registration</h1>
         <div className="loginWithGoogle">
           <FcGoogle className="google" onClick={loginWithGoogle} />
@@ -98,35 +175,36 @@ const Registration = () => {
           </div>
 
           <div className="inputField">
-            <label htmlFor="email">Photo URL</label>
+            <label htmlFor="profilePhoto">Profile Photo</label>
             <input
-              type="text"
-              placeholder="enter Photo URL"
-              id="photo"
-              name="photo"
-              required
+              type="file"
+              name="image"
+              id="profilePhoto"
+              className="profilePhotoInput"
             />
-            <MdOutlinePhotoSizeSelectActual className="icon" />
           </div>
 
           <div className="inputField">
             <label htmlFor="email">Account Type</label>
             <div className="accountRole">
-              <div className="acc">
+              <div className="acc flex items-center">
                 <input
                   type="radio"
                   id="seller"
                   name="accounttype"
                   value="seller"
+                  className="radio w-4 h-4"
                   defaultChecked
                 />
+
                 <label htmlFor="seller">Seller</label>
               </div>
-              <div className="acc">
+              <div className="acc flex items-center">
                 <input
                   type="radio"
                   id="buyer"
                   name="accounttype"
+                  className="radio w-4 h-4"
                   value="buyer"
                 />
                 <label htmlFor="buyer">Buyer</label>
@@ -156,7 +234,7 @@ const Registration = () => {
             />
             <FiLock className="icon" />
           </div>
-          <button type="submit" className="loginBtn">
+          <button type="submit" className="loginBtn bg-slate-700">
             Registration
           </button>
         </form>

@@ -69,11 +69,13 @@ const AllUser = () => {
           </thead>
           <tbody>
             {user?.length <= 0 ? (
-              <div className="noUserText flex justify-center items-center">
-                <h3 className="text-center font-bold text-xl">
-                  You haven't any Buyer
-                </h3>
-              </div>
+              <tr>
+                <td className="noUserText flex justify-center items-center">
+                  <h3 className="text-center font-bold text-xl">
+                    You haven't any Buyer
+                  </h3>
+                </td>
+              </tr>
             ) : (
               user.map((usr) => {
                 return (
@@ -93,13 +95,7 @@ const AllUser = () => {
                         </div>
                       </div>
                     </td>
-                    <td>
-                      {usr?.email}
-                      <br />
-                      <span className="badge badge-ghost badge-sm">
-                        Desktop Support Technician
-                      </span>
-                    </td>
+                    <td>{usr?.email}</td>
                     <td>{usr.accountType}</td>
                     <td>
                       <button
@@ -111,8 +107,11 @@ const AllUser = () => {
                     </td>
 
                     <td>
-                      <button onClick={() => handleMakeAdmin(usr._id)}>
-                        make admin
+                      <button
+                        className="bg-green-600 text-white py-1 px-3 rounded-md hover:bg-sky-700 ease-in duration-300"
+                        onClick={() => handleMakeAdmin(usr._id)}
+                      >
+                        Make admin
                       </button>
                     </td>
                   </tr>

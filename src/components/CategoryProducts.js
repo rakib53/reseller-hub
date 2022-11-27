@@ -21,6 +21,7 @@ const CategoryProducts = ({ products, setProductData }) => {
         <p className="descTitle">Description</p>
         <p>{products?.desc}</p>
       </div>
+
       <label
         onClick={() => setProductData(products)}
         htmlFor="buyNowModal"

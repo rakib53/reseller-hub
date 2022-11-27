@@ -10,6 +10,7 @@ import Home from "../pages/Home";
 import Login from "../pages/Login";
 import MyOrder from "../pages/MyOrder";
 import Myproducts from "../pages/Myproducts";
+import PageNotFound from "../pages/PageNotFound";
 import Products from "../pages/Products";
 import Registration from "../pages/Registration";
 
@@ -19,10 +20,9 @@ const Router = createBrowserRouter([
     element: <Main />,
     children: [
       { path: "/", element: <Home></Home> },
-
       {
-        path: "/myproducts",
-        element: <Myproducts></Myproducts>,
+        path: "*",
+        element: <PageNotFound></PageNotFound>,
       },
     ],
   },
