@@ -146,6 +146,7 @@ const AddProduct = () => {
               name="image"
               id="profilePhoto"
               className="profilePhotoInput"
+              required
             />
           </div>
 
