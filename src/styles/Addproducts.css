@@ -39,7 +39,7 @@ option {
   justify-content: center;
 }
 
-.addProductWrapper > .regSpinner {
+.addProductSpinner {
   background-color: #e8eff2 !important;
 }
 

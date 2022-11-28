@@ -111,9 +111,9 @@ const AddProduct = () => {
 
   return (
     <div className="container">
-      <div className="addProductsWrapper">
+      <div className="addProductsWrapper relative">
         {spinner && (
-          <div className="regSpinner">
+          <div className="regSpinner addProductSpinner py-5">
             <img className="spinners" src={spiner} alt={""} />
             <p>Adding Poduct Please Wait...</p>
           </div>
