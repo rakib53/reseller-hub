@@ -7,7 +7,7 @@ const MyOrder = () => {
   const { user } = useContext(myContext);
 
   useEffect(() => {
-    fetch(`http://localhost:5000/orders/?email=${user?.email}`)
+    fetch(`https://resellerhub.vercel.app/orders/?email=${user?.email}`)
       .then((res) => {
         return res.json();
       })
@@ -17,7 +17,7 @@ const MyOrder = () => {
       .catch((err) => {
         console.log(err.message);
       });
-  }, [user]);
+  }, [user?.email]);
 
   return (
     <div className="container">

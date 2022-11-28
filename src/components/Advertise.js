@@ -1,11 +1,34 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const Advertise = () => {
+  const [ads, setAds] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/advertises")
+      .then(function (response) {
+        setAds(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }, []);
+
+  console.log(ads);
+
   return (
     <div className="container">
-      <h2>Advertise</h2>
+      <h2 className="text-4xl">Advertise</h2>
       <div className="adsWrapper">
-        <h1>This is advertise page!</h1>
+        {ads.map((ads) => {
+          console.log(ads.adProduct.name);
+          return (
+            <>
+              <h1>{ads?.adProduct.name}</h1>
+            </>
+          );
+        })}
       </div>
     </div>
   );

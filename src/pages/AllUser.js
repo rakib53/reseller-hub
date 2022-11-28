@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
+import React, { useState } from "react";
 import blueTick from "../images/blueTick.png";
 
 const AllUser = () => {
   const [user, setUser] = useState([]);
 
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://resellerhub.vercel.app/users/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -21,8 +22,22 @@ const AllUser = () => {
       });
   };
 
+  const { data = [], refetch } = useQuery({
+    queryKey: ["seller"],
+    queryFn: () => {
+      fetch("https://resellerhub.vercel.app/users")
+        .then((res) => res.json())
+        .then((data) => {
+          const allSeller = data.filter((seller) => {
+            return seller.accountType === "seller";
+          });
+          setUser(allSeller);
+        });
+    },
+  });
+
   const makeVerifiedBuyer = (id, email) => {
-    fetch(`http://localhost:5000/users/verify/${id}`, {
+    fetch(`https://resellerhub.vercel.app/users/verify/${id}`, {
       method: "PATCH",
       headers: {
         "content-type": "application/json",
@@ -34,7 +49,8 @@ const AllUser = () => {
       })
       .then((data) => {
         setUser(user);
-        fetch("http://localhost:5000/products/verified", {
+        refetch();
+        fetch("https://resellerhub.vercel.app/products/verified", {
           method: "PATCH",
           headers: {
             "content-type": "application/json",
@@ -56,24 +72,8 @@ const AllUser = () => {
       });
   };
 
-  useEffect(() => {
-    fetch("http://localhost:5000/users")
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        const allSeller = data.filter((seller) => {
-          return seller.accountType === "seller";
-        });
-        setUser(allSeller);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
-
   const deleteUser = (id) => {
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://resellerhub.vercel.app/users/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
@@ -91,7 +91,7 @@ const AllUser = () => {
   };
 
   return (
-    <div className="px-20">
+    <div className="px-5 lg:px-20">
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
           <thead>

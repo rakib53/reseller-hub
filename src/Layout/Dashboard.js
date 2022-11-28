@@ -1,11 +1,10 @@
 import React from "react";
 import { Outlet } from "react-router-dom";
 import SideNav from "../components/SideNav";
-// import Navbar from "../components/Navbar";
 
 const Dashboard = () => {
   return (
-    <div className="flex">
+    <div className="flex flex-col lg:flex-row">
       <div className="w-64">
         <SideNav></SideNav>
       </div>

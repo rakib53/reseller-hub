@@ -1,15 +1,15 @@
 import React, { useContext } from "react";
 import { Navigate, useLocation } from "react-router-dom";
-import { Context } from "../../Context/CreateContext";
-import spinner from "../../images/spinner.svg";
+import { myContext } from "../Ccontext/Context";
+import spinner from "../images/spinner.svg";
 
 const PrivateRoute = ({ children }) => {
-  const { user, loader } = useContext(Context);
+  const { user, loader } = useContext(myContext);
   const location = useLocation();
 
   if (loader) {
     return (
-      <div className="spinner">
+      <div className="priVatespinner">
         <img src={spinner} alt="spinner" />
       </div>
     );
@@ -19,7 +19,7 @@ const PrivateRoute = ({ children }) => {
     return children;
   }
 
-  return <Navigate to="/signin" state={{ from: location }} replace></Navigate>;
+  return <Navigate to="/login" state={{ from: location }} replace></Navigate>;
 };
 
 export default PrivateRoute;

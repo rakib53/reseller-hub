@@ -12,7 +12,7 @@ const AddProduct = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://resellerhub.vercel.app/users")
       .then((res) => {
         return res.json();
       })
@@ -62,7 +62,7 @@ const AddProduct = () => {
       })
       .then((imageData) => {
         if (imageData.success) {
-          fetch("http://localhost:5000/products", {
+          fetch("https://resellerhub.vercel.app/products", {
             method: "POST",
             headers: {
               "content-type": "application/json",

@@ -1,10 +1,9 @@
 import React, { useContext } from "react";
+import toast, { Toaster } from "react-hot-toast";
 import { myContext } from "../Ccontext/Context";
 
 const BuyNowModal = ({ productData }) => {
   const { user } = useContext(myContext);
-
-  console.log(productData);
 
   const handleOrderSubmit = (event) => {
     event.preventDefault();
@@ -20,7 +19,7 @@ const BuyNowModal = ({ productData }) => {
     const salesStatus = "Booked";
     const productImage = productData?.image;
 
-    fetch("http://localhost:5000/orders", {
+    fetch("https://resellerhub.vercel.app/orders", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -42,8 +41,8 @@ const BuyNowModal = ({ productData }) => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
-        fetch(`http://localhost:5000/products/${productId}`, {
+        notifySuccess("Successfully Book a Product!");
+        fetch(`https://resellerhub.vercel.app/products/${productId}`, {
           method: "PUT",
           headers: {
             "content-type": "application/json",
@@ -53,23 +52,25 @@ const BuyNowModal = ({ productData }) => {
           .then((res) => {
             return res.json();
           })
-          .then((data) => {
-            console.log(data);
-          })
+          .then((data) => {})
           .catch((err) => {
-            console.log(err);
+            notifyError(err);
           });
       })
       .catch((err) => {
-        console.log(err);
+        notifyError(err);
       });
 
     event.target.phone.value = "";
     event.target.location.value = "";
   };
 
+  const notifySuccess = (text) => toast.success(text);
+  const notifyError = (text) => toast.error(text);
+
   return (
     <div>
+      <Toaster position="top-right" reverseOrder={false} />
       <input type="checkbox" id="buyNowModal" className="modal-toggle" />
       <div className="modal">
         <div className="modal-box relative bg-white py-3 px-3">

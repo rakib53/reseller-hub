@@ -14,6 +14,7 @@ import Myproducts from "../pages/Myproducts";
 import PageNotFound from "../pages/PageNotFound";
 import Products from "../pages/Products";
 import Registration from "../pages/Registration";
+import PrivateRoute from "./PrivateRoute";
 
 const Router = createBrowserRouter([
   {
@@ -49,13 +50,21 @@ const Router = createBrowserRouter([
     children: [
       {
         path: "/products/:categoryCode",
-        element: <Products />,
+        element: (
+          <PrivateRoute>
+            <Products />
+          </PrivateRoute>
+        ),
       },
     ],
   },
   {
     path: "/dashboard",
-    element: <Dashboard></Dashboard>,
+    element: (
+      <PrivateRoute>
+        <Dashboard></Dashboard>
+      </PrivateRoute>
+    ),
     children: [
       {
         path: "/dashboard/addproduct",

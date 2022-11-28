@@ -12,21 +12,8 @@ const Myproducts = () => {
   const notifySuccess = (text) => toast.success(text);
   const notifyError = (text) => toast.error(text);
 
-  useEffect(() => {
-    fetch(`http://localhost:5000/myproducts/?email=${user?.email}`)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data) => {
-        setProducts(data);
-      })
-      .catch((err) => {
-        notifyError(err.message);
-      });
-  }, [user]);
-
   const deleteProduct = (id) => {
-    fetch(`http://localhost:5000/products/${id}`, {
+    fetch(`https://resellerhub.vercel.app/products/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
@@ -44,25 +31,34 @@ const Myproducts = () => {
       });
   };
 
-  const getAdvertise = (prdt) => {
-    console.log(prdt);
+  // handleAdvertise
+  const handleAdvertise = (adProduct) => {
     fetch("http://localhost:5000/advertises", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
-      body: JSON.stringify({ prdt }),
+      body: JSON.stringify({ adProduct }),
     })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        toast.success("advertised SuccessFully!");
+      });
+  };
+
+  useEffect(() => {
+    fetch(`https://resellerhub.vercel.app/myproducts/?email=${user?.email}`)
       .then((res) => {
         return res.json();
       })
-      .then((produt) => {
-        console.log(produt);
+      .then((data) => {
+        setProducts(data);
       })
       .catch((err) => {
-        console.log(err.message);
+        notifyError(err.message);
       });
-  };
+  }, [user?.email]);
 
   return (
     <div className="container">
@@ -107,7 +103,7 @@ const Myproducts = () => {
                   )}
                   <div className="mt-2">
                     <button
-                      onClick={() => getAdvertise(product)}
+                      onClick={() => handleAdvertise(product)}
                       className="productAction soldProduct"
                     >
                       Advertise

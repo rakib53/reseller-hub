@@ -10,7 +10,7 @@ const Products = () => {
   const { categoryCode } = useParams();
 
   useEffect(() => {
-    fetch("http://localhost:5000/products")
+    fetch("https://resellerhub.vercel.app/products")
       .then((res) => {
         return res.json();
       })

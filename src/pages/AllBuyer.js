@@ -4,7 +4,7 @@ const AllUser = () => {
   const [user, setUser] = useState([]);
 
   const handleMakeAdmin = (id) => {
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://resellerhub.vercel.app/users/${id}`, {
       method: "PATCH",
     })
       .then((res) => res.json())
@@ -21,7 +21,7 @@ const AllUser = () => {
   };
 
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://resellerhub.vercel.app/users")
       .then((res) => {
         return res.json();
       })
@@ -37,7 +37,7 @@ const AllUser = () => {
   }, []);
 
   const deleteUser = (id) => {
-    fetch(`http://localhost:5000/users/${id}`, {
+    fetch(`https://resellerhub.vercel.app/users/${id}`, {
       method: "DELETE",
     })
       .then((res) => {
@@ -55,7 +55,7 @@ const AllUser = () => {
   };
 
   return (
-    <div className="px-20">
+    <div className="px-5 lg:px-20">
       <div className="overflow-x-auto w-full">
         <table className="table w-full">
           <thead>

@@ -3,7 +3,7 @@ import toast, { Toaster } from "react-hot-toast";
 import { AiOutlineUserDelete } from "react-icons/ai";
 import { FcGoogle } from "react-icons/fc";
 import { FiLock } from "react-icons/fi";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { myContext } from "../Ccontext/Context";
 import "../styles/Login.css";
 
@@ -13,6 +13,8 @@ const Login = () => {
   const notifySuccess = (text) => toast.success(text);
   const notifyError = (text) => toast.error(text);
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
 
   const handleLogin = (event) => {
     event.preventDefault();
@@ -20,10 +22,10 @@ const Login = () => {
     const password = event.target.password.value;
     loginWithEmailPass(name, password)
       .then((user) => {
-        notifySuccess(
-          "Login succcesssssssssssssssssssssssssssssssssssssssssssssssssss"
-        );
-        navigate("/");
+        if (user.user.uid) {
+          navigate(from, { replace: true });
+          notifySuccess("Login succcess");
+        }
       })
       .catch((err) => {
         notifyError(err.message);
@@ -33,8 +35,26 @@ const Login = () => {
   const loginWithGoogle = () => {
     LoginWithGoogle()
       .then((user) => {
+        fetch("https://resellerhub.vercel.app/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            displayName: user.displayName,
+            email: user.email,
+            photoURL: user.photoURL,
+            accountType: "buyer",
+          }),
+        })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((err) => {
+            console.log(err.message);
+          });
+        navigate(from, { replace: true });
         notifySuccess("Successfully Logged in with Google!");
-        navigate("/");
       })
       .catch((err) => {
         notifyError(err.message);

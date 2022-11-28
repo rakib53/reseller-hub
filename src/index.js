@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import "bootstrap/dist/css/bootstrap.min.css";
 import React from "react";
 import ReactDOM from "react-dom/client";
@@ -5,14 +6,17 @@ import App from "./App";
 import Context from "./Ccontext/Context";
 import "./index.css";
 import reportWebVitals from "./reportWebVitals";
+const queryClient = new QueryClient();
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <Context>
-    <React.StrictMode>
-      <App />
-    </React.StrictMode>
-  </Context>
+  <QueryClientProvider client={queryClient}>
+    <Context>
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>
+    </Context>
+  </QueryClientProvider>
 );
 
 // If you want to start measuring performance in your app, pass a function

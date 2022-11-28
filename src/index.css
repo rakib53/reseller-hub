@@ -28,6 +28,13 @@ body {
   height: 100vh !important;
 }
 
+.priVatespinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 @media screen and (max-width: 991px) {
   .container {
     padding: 0 20px;

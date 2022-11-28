@@ -41,7 +41,7 @@ const Registration = () => {
           regWithEmailPass(email, password)
             .then((user) => {
               setSpinner(false);
-              fetch("http://localhost:5000/users", {
+              fetch("https://resellerhub.vercel.app/users", {
                 method: "POST",
                 headers: {
                   "content-type": "application/json",
@@ -84,7 +84,7 @@ const Registration = () => {
       .then((users) => {
         const user = users.user;
 
-        fetch("http://localhost:5000/users", {
+        fetch("https://resellerhub.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",
@@ -160,24 +160,24 @@ const Registration = () => {
               <div className="acc flex items-center">
                 <input
                   type="radio"
-                  id="seller"
-                  name="accounttype"
-                  value="seller"
-                  className="radio w-4 h-4"
-                  defaultChecked
-                />
-
-                <label htmlFor="seller">Seller</label>
-              </div>
-              <div className="acc flex items-center">
-                <input
-                  type="radio"
                   id="buyer"
                   name="accounttype"
                   className="radio w-4 h-4"
                   value="buyer"
+                  defaultChecked
                 />
                 <label htmlFor="buyer">Buyer</label>
+              </div>
+              <div className="acc flex items-center">
+                <input
+                  type="radio"
+                  id="seller"
+                  name="accounttype"
+                  value="seller"
+                  className="radio w-4 h-4"
+                />
+
+                <label htmlFor="seller">Seller</label>
               </div>
             </div>
           </div>
