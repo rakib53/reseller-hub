@@ -12,13 +12,14 @@ const Home = () => {
             <div className="w-full lg:w-1/2">
               <div className="lg:max-w-lg">
                 <h1 className="text-3xl font-semibold text-gray-800  lg:text-4xl">
-                  Best Place To choose your Clothes
+                  Best Place To find your needs
                 </h1>
 
                 <p className="mt-4 text-gray-600 dark:text-gray-400">
-                  Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                  Porro beatae error laborum ab amet sunt recusandae? Reiciendis
-                  natus perspiciatis optio.
+                  Choose from over 4,500 items that can be delivered to your
+                  doorstep. Order online and enjoy our Buyer Protection program,
+                  which means that we’ll replace the item for FREE if it’s not
+                  as described in the ad!
                 </p>
 
                 <button className="w-full text-white px-5 py-2 mt-6 text-sm tracking-wide uppercase transition-colors duration-300 transform bg-blue-600 rounded-md lg:w-auto hover:bg-blue-500 focus:outline-none focus:bg-blue-500">
