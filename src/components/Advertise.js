@@ -6,7 +6,7 @@ const Advertise = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/advertises")
+      .get("https://resellerhub.vercel.app/advertises")
       .then(function (response) {
         setAds(response.data);
       })
