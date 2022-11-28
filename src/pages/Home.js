@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import Advertise from "../components/Advertise";
 import Category from "../components/Category";
 
@@ -38,6 +39,74 @@ const Home = () => {
       </header>
       <Category></Category>
       <Advertise></Advertise>
+
+      <section className="p-6 dark:text-gray-100">
+        <h2 className="text-black text-center text-4xl my-5">Our Statics</h2>
+        <div className="container mx-auto grid justify-center grid-cols-2 text-center lg:grid-cols-3">
+          <div className="flex flex-col justify-start m-2 lg:m-6">
+            <p className="text-4xl font-bold leading-none lg:text-6xl text-black">
+              50+
+            </p>
+            <p className="text-sm sm:text-base text-black">Clients</p>
+          </div>
+          <div className="flex flex-col justify-start m-2 lg:m-6">
+            <p className="text-4xl font-bold leading-none lg:text-6xl text-black">
+              89K
+            </p>
+            <p className="text-sm sm:text-base text-black">
+              Followers on social media
+            </p>
+          </div>
+          <div className="flex flex-col justify-start m-2 lg:m-6">
+            <p className="text-4xl font-bold leading-none lg:text-6xl text-black">
+              3
+            </p>
+            <p className="text-sm sm:text-base text-black">Published books</p>
+          </div>
+          <div className="flex flex-col justify-start m-2 lg:m-6">
+            <p className="text-4xl font-bold leading-none lg:text-6xl text-black">
+              8
+            </p>
+            <p className="text-sm sm:text-base text-black">TED talks</p>
+          </div>
+          <div className="flex flex-col justify-start m-2 lg:m-6">
+            <p className="text-4xl font-bold leading-none lg:text-6xl text-black">
+              22
+            </p>
+            <p className="text-sm sm:text-base text-black">
+              Years of experience
+            </p>
+          </div>
+          <div className="flex flex-col justify-start m-2 lg:m-6">
+            <p className="text-4xl font-bold leading-none lg:text-6xl text-black">
+              10+
+            </p>
+            <p className="text-sm sm:text-base text-black">Workshops</p>
+          </div>
+        </div>
+      </section>
+
+      <div className="p-6 my-5 py-12 dark:bg-violet-400 dark:text-gray-900">
+        <div className="container mx-auto">
+          <div className="flex flex-col lg:flex-row items-center justify-between">
+            <h2 className="text-center text-6xl tracking-tighter font-bold">
+              Up to
+              <br className="sm:hidden" />
+              50% Off
+            </h2>
+            <div className="space-x-2 text-center py-2 lg:py-0">
+              <span>Start making money!</span>
+            </div>
+            <Link
+              href="#"
+              rel="noreferrer noopener"
+              className="px-5 mt-4 lg:mt-0 py-3 rounded-md border block dark:bg-gray-50 dark:text-gray-900 dark:border-gray-400"
+            >
+              Shop Now
+            </Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
