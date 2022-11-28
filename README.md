@@ -3,8 +3,8 @@
 The Live [link](https://resellerhub-ecb94.web.app/) of this project is https://resellerhub-ecb94.web.app/
 and the Server of the project is https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-rakib53
 
-admin email:- admin@gmail.com
-admin Password:- admin1234
+- admin email:- admin@gmail.com
+- admin Password:- admin1234
 
 ## About some features of this project
 
