@@ -1,18 +1,24 @@
-# Getting Started with Create React App
+# Getting Knowing about our project
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The Live [link](https://resellerhub-ecb94.web.app/) of this project is https://resellerhub-ecb94.web.app/
+and the Server of the project is https://github.com/programming-hero-web-course-4/b612-used-products-resale-server-side-rakib53
 
-## Available Scripts
+admin email:- admin@gmail.com
+admin Password:- admin1234
 
-In the project directory, you can run:
+## About some features of this project
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- This is a react project that taken by programming hero assignment.
+- this website about is a Selling Second hand products.
+- This website has a home where you can see a hero section.
+  .
+- Also have a product section and can you see the details about product by clicking view category.
+- You can click on the specific serivce to know about the service and also you can order them.
+- you can registration and login here with your email password.
+- Also have a Protected route where you need to login if youre not login here.
+- Have a blog page where can we get some Interview Question for React.
+- and the whole website is responsive for desktop, mobile, tablet etc.
+- Also there are many featuers to explore by visiting https://resellerhub-ecb94.web.app/
 
 ### `npm test`
 
