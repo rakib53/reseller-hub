@@ -142,43 +142,47 @@ const Navbar = () => {
                     <ul className="space-y-4">
                       <li>
                         <Link
-                          to={"/"}
-                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          to={"/dashboard"}
+                          className="font-medium tracking-wide transition-colors duration-200 hover:text-teal-accent-400"
                         >
-                          Product
+                          Dashboard
                         </Link>
                       </li>
                       <li>
                         <Link
-                          to={"/"}
-                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
+                          to={"/blog"}
+                          className="font-medium tracking-wide transition-colors duration-200 hover:text-teal-accent-400"
                         >
-                          Features
+                          Blog
                         </Link>
                       </li>
+
                       <li>
-                        <Link
-                          to={"/"}
-                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                        >
-                          Pricing
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to={"/"}
-                          className="font-medium tracking-wide text-gray-700 transition-colors duration-200 hover:text-deep-purple-accent-400"
-                        >
-                          About us
-                        </Link>
-                      </li>
-                      <li>
-                        <Link
-                          to={"/"}
-                          className="inline-flex items-center justify-center w-full h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
-                        >
-                          Sign up
-                        </Link>
+                        {user && user.uid ? (
+                          <div className="inline-flex items-center bg-slate-400 p-2 rounded">
+                            <Link
+                              onClick={handleSignOut}
+                              className="font-medium tracking-wide transition-colors duration-200 hover:text-teal-accent-400 mr-3"
+                            >
+                              Logout
+                            </Link>
+                            <div className="profile">
+                              <img
+                                className="w-11 h-11 rounded-full object-cover"
+                                src={user?.photoURL}
+                                title={user?.displayName}
+                                alt=""
+                              />
+                            </div>
+                          </div>
+                        ) : (
+                          <Link
+                            to={"/login"}
+                            className="inline-flex items-center justify-center h-12 px-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-deep-purple-accent-400 hover:bg-deep-purple-accent-700 focus:shadow-outline focus:outline-none"
+                          >
+                            Login
+                          </Link>
+                        )}
                       </li>
                     </ul>
                   </nav>

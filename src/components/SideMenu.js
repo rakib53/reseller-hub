@@ -23,8 +23,6 @@ const SideMenu = () => {
       });
   }, [user]);
 
-  console.log(users);
-
   return (
     <div className="p-3">
       <div className="flex flex-col justify-between flex-1 mt-6">

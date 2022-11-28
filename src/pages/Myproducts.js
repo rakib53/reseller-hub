@@ -105,12 +105,14 @@ const Myproducts = () => {
                       {product?.salesStatus}
                     </Link>
                   )}
-                  <button
-                    onClick={() => getAdvertise(product)}
-                    className="bg-red-500 text-white rounded p-1"
-                  >
-                    Advertise
-                  </button>
+                  <div className="mt-2">
+                    <button
+                      onClick={() => getAdvertise(product)}
+                      className="productAction soldProduct"
+                    >
+                      Advertise
+                    </button>
+                  </div>
                 </div>
               </div>
             );

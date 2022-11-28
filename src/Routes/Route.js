@@ -6,6 +6,7 @@ import Main from "../Layout/Main";
 import AddProduct from "../pages/AddProduct";
 import AllBuyer from "../pages/AllBuyer";
 import AllUser from "../pages/AllUser";
+import Blog from "../pages/Blog";
 import Home from "../pages/Home";
 import Login from "../pages/Login";
 import MyOrder from "../pages/MyOrder";
@@ -23,6 +24,10 @@ const Router = createBrowserRouter([
       {
         path: "*",
         element: <PageNotFound></PageNotFound>,
+      },
+      {
+        path: "/blog",
+        element: <Blog></Blog>,
       },
     ],
   },

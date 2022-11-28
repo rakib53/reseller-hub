@@ -21,7 +21,7 @@ const AllUser = () => {
       });
   };
 
-  const makeVerifiedBuyer = (id) => {
+  const makeVerifiedBuyer = (id, email) => {
     fetch(`http://localhost:5000/users/verify/${id}`, {
       method: "PATCH",
       headers: {
@@ -33,8 +33,23 @@ const AllUser = () => {
         return res.json();
       })
       .then((data) => {
-        console.log(data);
         setUser(user);
+        fetch("http://localhost:5000/products/verified", {
+          method: "PATCH",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({ email }),
+        })
+          .then((res) => {
+            return res.json();
+          })
+          .then((data) => {
+            console.log(data);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       })
       .catch((err) => {
         console.log(err.message);
@@ -147,7 +162,7 @@ const AllUser = () => {
                     ) : (
                       <button
                         className="bg-red-600 text-white py-1 px-3 rounded-md hover:bg-sky-700 ease-in duration-300"
-                        onClick={() => makeVerifiedBuyer(usr._id)}
+                        onClick={() => makeVerifiedBuyer(usr._id, usr.email)}
                       >
                         Verify
                       </button>

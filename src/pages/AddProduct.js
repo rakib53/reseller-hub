@@ -1,18 +1,38 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { myContext } from "../Ccontext/Context";
+import spiner from "../images/spinner.svg";
 import "../styles/Addproducts.css";
 
 const AddProduct = () => {
+  const [sellerVerified, setSellerVerified] = useState([]);
+  const [spinner, setSpinner] = useState(false);
   const { user } = useContext(myContext);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    fetch("http://localhost:5000/users")
+      .then((res) => {
+        return res.json();
+      })
+      .then((data) => {
+        const seller = data.filter((seller) => {
+          return seller.email === user?.email;
+        });
+        setSellerVerified(seller);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, [user]);
+
   const handleAddProduct = (event) => {
     event.preventDefault();
+    setSpinner(true);
+
     const productTitle = event.target.productTitle.value;
     const brandName = event.target.brandName.value;
-    // const uploadPhoto = event.target.uploadPhoto.value;
     const productCondition = event.target.productCondition.value;
     const sellPrice = event.target.sellPrice.value;
     const originalPrice = event.target.originalPrice.value;
@@ -22,7 +42,6 @@ const AddProduct = () => {
     const productDesc = event.target.productDesc.value;
     const sellerName = user?.displayName;
     const sellerEmail = user?.email;
-    const isSellerVerified = true;
     const categry = event.target.category.value;
     const postOn = `${new Date().toDateString().split(" ")[1]} ${
       new Date().toDateString().split(" ")[2]
@@ -30,7 +49,7 @@ const AddProduct = () => {
       new Date().toLocaleString().split(" ")[1].split(":")[1]
     } ${new Date().toLocaleString().split(" ")[2]}`;
     const imageBBKey = process.env.REACT_APP_imgbbKey;
-    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageBBKey}`;
+    const url = `https://api.imgbb.com/1/upload?key=${imageBBKey}`;
     const formData = new FormData();
     formData.append("image", event.target.image.files[0]);
 
@@ -61,7 +80,7 @@ const AddProduct = () => {
               yearOfUsed: usedTime,
               sellerName: sellerName,
               sellerEmail: sellerEmail,
-              sellerVerfied: isSellerVerified,
+              sellerVerfied: sellerVerified[0]?.isVerified,
               phone: phoneNumber,
               salesStatus: "available",
               postedOn: postOn,
@@ -72,6 +91,7 @@ const AddProduct = () => {
             })
             .then((data) => {
               if (data.acknowledged) {
+                setSpinner(false);
                 notifySuccess("Successfully Added a Product!");
                 navigate("/dashboard/myproduct");
               }
@@ -84,43 +104,6 @@ const AddProduct = () => {
       .catch((err) => {
         console.log(err.message);
       });
-
-    // fetch("http://localhost:5000/products", {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     name: productTitle,
-    //     brand: brandName,
-    //     desc: productDesc,
-    //     image: uploadPhoto,
-    //     category: categry,
-    //     condition: productCondition,
-    //     location: addLocation,
-    //     originalPrice: originalPrice,
-    //     sellPrice: sellPrice,
-    //     yearOfUsed: usedTime,
-    //     sellerName: sellerName,
-    //     sellerEmail: sellerEmail,
-    //     sellerVerfied: isSellerVerified,
-    //     phone: phoneNumber,
-    //     salesStatus: "available",
-    //     postedOn: postOn,
-    //   }),
-    // })
-    //   .then((res) => {
-    //     return res.json();
-    //   })
-    //   .then((data) => {
-    //     if (data.acknowledged) {
-    //       notifySuccess("Successfully Added a Product!");
-    //       navigate("/dashboard/myproduct");
-    //     }
-    //   })
-    //   .catch((err) => {
-    //     notifyError(err.message);
-    //   });
   };
 
   const notifySuccess = (text) => toast.success(text);
@@ -129,6 +112,12 @@ const AddProduct = () => {
   return (
     <div className="container">
       <div className="addProductsWrapper">
+        {spinner && (
+          <div className="regSpinner">
+            <img className="spinners" src={spiner} alt={""} />
+            <p>Adding Poduct Please Wait...</p>
+          </div>
+        )}
         <form onSubmit={handleAddProduct}>
           <div className="inputFiled">
             <input

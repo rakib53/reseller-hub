@@ -25,7 +25,7 @@ const Registration = () => {
     const email = event.target.email.value;
     const password = event.target.password.value;
     const imageBBKey = process.env.REACT_APP_imgbbKey;
-    const url = `https://api.imgbb.com/1/upload?expiration=600&key=${imageBBKey}`;
+    const url = `https://api.imgbb.com/1/upload?key=${imageBBKey}`;
     const formData = new FormData();
     formData.append("image", event.target.image.files[0]);
 
@@ -49,8 +49,10 @@ const Registration = () => {
                 body: JSON.stringify({
                   displayName: name,
                   email,
+                  password,
                   photoURL: imageData.data.url,
                   accountType,
+                  isVerified: false,
                 }),
               })
                 .then((data) => {
@@ -122,7 +124,7 @@ const Registration = () => {
         {spinner && (
           <div className="regSpinner">
             <img className="spinners" src={spiner} alt={""} />
-            <p>Uploading Photo Please Wait!!</p>
+            <p>Uploading Photo Please Wait...</p>
           </div>
         )}
         <h1 className="title">Registration</h1>

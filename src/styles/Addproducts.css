@@ -39,6 +39,10 @@ option {
   justify-content: center;
 }
 
+.addProductWrapper > .regSpinner {
+  background-color: #e8eff2 !important;
+}
+
 .addProducts {
   padding: 15px 30px;
   background-color: #636e72;
